@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+  <img
+      alt="detail"
+      src="{{ product.image.url }}" style="width: 50%;"
+      class="responsive border-0 rounded-md img-fluid mb-3 sh-35 sh-md-45 sh-xl-60 w-100"
+  />
+  
+      
+  <h3 class="mb-4">{{ product.name }}</h3>
+
+  <div class="h4">{{ product.price }}</div>
+
+  <p class="mt-2 mb-4 sh-11 clamp-line" data-line="4">
+  {{ product.description }}
+  </p>
+      
+
+  
+  <form method="post" action="{% url 'add_to_cart_two' product_id=product.id %}">
+    {% csrf_token %}
+    <input type="submit" value="Add to Cart">
+    </form> 
+                
+ 
+</body>
+</html>

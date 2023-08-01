@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cart Items</title>
+</head>
+<body>
+    <h1>Cart Items</h1>
+    
+    <!-- cart_items.html -->
+{% if cart_items %}
+<ul>
+    {% for item in cart_items %}
+        <li>
+            {{ item.product.name }} - {{ item.product.price }} USD
+            <br>
+            Quantity: {{ item.quantity }}
+            <a href="{% url 'increase_quantity' item.id %}">[+] Increase</a>
+            <a href="{% url 'decrease_quantity' item.id %}">[-] Decrease</a>
+            <a href="{% url 'delete_cart_item' item.id %}">[x] Delete</a>
+        </li>
+    {% endfor %}
+</ul>
+Total Price: {{ total_price }} USD
+<a href="{% url 'delete_all_cart_items' %}">Delete All Items</a>
+{% else %}
+<p>Your cart is empty.</p>
+{% endif %}
+
+    <p>Total Price: {{ total_price }}</p>
+    <h3>
+        <a href="{% url 'checkout' %}">Checkout</a>
+    </h3>
+    
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>hOME</title>
+</head>
+<body>
+
+    <!-- Add this link where you want to display the cart items count -->
+    <a href="{% url 'cart_items_view' %}">View Cart ({{ cart_items_count }})</a>
+
+    <h1>Product Listing</h1>
+    
+    {% for product in products %}
+    <div>
+        <a href="{% url 'product_view' product.pk %}" class="body-link d-block stretched-link sh-4">
+            <h3 class="clamp-line" data-line="2">{{ product.name }}</h3>
+        </a>
+        <p>Price: ${{ product.price }}</p>
+        <form method="post" action="{% url 'add_to_cart_one' product.id %}">
+            {% csrf_token %}
+            <input type="submit" value="Add to Cart">
+        </form>
+        
+    </div>
+    {% endfor %}
+
+
+</body>
+</html>

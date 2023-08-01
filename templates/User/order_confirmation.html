@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Confirmation</title>
+</head>
+<body>
+    <h1>Order Confirmation</h1>
+    <p>Order ID: {{ order.id }}</p>
+    <p>Name: {{ order.name }}</p>
+    <p>Address: {{ order.address }}</p>
+    <p>Mobile Number: {{ order.mobile_number }}</p>
+    <p>WhatsApp Number: {{ order.whatsapp_number }}</p>
+    <p>Total Price: {{ order.total_price }}</p>
+    <p>Order Date: {{ order.created_at }}</p>
+
+    <h2>Ordered Products</h2>
+    <ul>
+        {% for cart_item in order.cart.cartitem_set.all %}
+        <li>
+            Product: {{ cart_item.product.name }}
+            - Quantity: {{ cart_item.quantity }}
+            - Price: {{ cart_item.product.price }}
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
