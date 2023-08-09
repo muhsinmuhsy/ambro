@@ -534,7 +534,7 @@ def checkout(request):
         order_details_encoded = quote(order_details)
 
         # Construct the WhatsApp URL with order details
-        whatsapp_url = f"https://api.whatsapp.com/send?phone=+919895291631&text={order_details_encoded}"
+        whatsapp_url = f"https://api.whatsapp.com/send?phone=+919614900400&text={order_details_encoded}"
 
         # Redirect the user to WhatsApp with the order details pre-filled
         return redirect(whatsapp_url)

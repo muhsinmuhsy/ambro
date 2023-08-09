@@ -22,6 +22,7 @@
   padding: 15px;
   color: #ef4c41;
   font-size: 16px;
+  font-weight: bold;
 }
 
 .error {
@@ -29,7 +30,7 @@
 }
 
 .success {
-  background-color: #a19e93;
+  background-color:#ffff;
   margin: 5px;
 }
 
@@ -5201,11 +5202,12 @@ ul.wp-block-latest-posts.is-grid.alignwide {
   display: flex;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
-  justify-content: center; }
+  justify-content: end;
+   }
 video {
     display: block;
     width: 100%;
-    height: auto;
+    height: 250px;
 }
 @media only screen and (max-width: 768px) {
   .site-logo .logofi {
@@ -5217,7 +5219,7 @@ video {
 }
 @media only screen and (min-width: 768px) {
   .site-logo .logofi {
-    max-width: 45%;
+    max-width: 35%;
     margin-left: 50px;
   }
  
@@ -7885,7 +7887,7 @@ video {
 
 @media (max-width: 1599px) {
   .ltn__section-title-2 .section-title {
-    font-size: 60px; } }
+    font-size: 50px; } }
 
 @media (max-width: 1399px) {
   .ltn__section-title-2 .section-title {
