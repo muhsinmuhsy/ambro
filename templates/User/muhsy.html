@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>hOME</title>
+</head>
+<body>
+
+    <!-- Add this link where you want to display the cart items count -->
+    <a href="{% url 'cart_items_view' %}">View Cart ({{ cart_items_count }})</a>
+
+    <h1>Product Listing</h1>
+    
+    {% for product in products %}
+    <div>
+        <a href="{% url 'product_view' product.pk %}" class="body-link d-block stretched-link sh-4">
+            <h3 class="clamp-line" data-line="2">{{ product.name }}</h3>
+        </a>
+        <p>Price: ${{ product.price }}</p>
+        <form method="post" action="{% url 'add_to_cart_one' product.id %}">
+            {% csrf_token %}
+            <input type="submit" value="Add to Cart">
+        </form>
+        
+    </div>
+    {% endfor %}
+
+
+</body>
+</html>
+
+
+<!-------------------------------------------------------------------------------->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cart Items</title>
+</head>
+<body>
+    <h1>Cart Items</h1>
+    
+    <!-- cart_items.html -->
+{% if cart_items %}
+<ul>
+    {% for item in cart_items %}
+        <li>
+            {{ item.product.name }} - {{ item.product.price }} USD
+            <br>
+            Quantity: {{ item.quantity }}
+            {{ item.subtotal }}
+            <a href="{% url 'increase_quantity' item.id %}">[+] Increase</a>
+            <a href="{% url 'decrease_quantity' item.id %}">[-] Decrease</a>
+            <a href="{% url 'delete_cart_item' item.id %}">[x] Delete</a>
+        </li>
+    {% endfor %}
+</ul>
+Total Price: {{ total_price }} USD
+<a href="{% url 'delete_all_cart_items' %}">Delete All Items</a>
+{% else %}
+<p>Your cart is empty.</p>
+{% endif %}
+
+    <!-- <p>Total Price: {{ total_price }}</p> -->
+
+    <tr>
+        <td colspan="3">Tax (5%):</td>
+        <td>{{ total_price }}</td>  <!-- Display tax amount -->
+    </tr>
+  
+    <h3>
+        <a href="{% url 'checkout' %}">Checkout</a>
+    </h3>
+    
+</body>
+</html>
+
+
+<!---------------------------------------------------------------------------------------------------------------->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout</title>
+</head>
+<body>
+    <h1>Checkout</h1>
+    <h2>Selected Products:</h2>
+    <ul>
+        {% for cart_item in cart_items %}
+        <li>
+            Product: {{ cart_item.product.name }}
+            - Quantity: {{ cart_item.quantity }}
+            - Price: {{ cart_item.product.price }}
+        </li>
+        {% endfor %}
+    </ul>
+    <p>Total Price: {{ total_price }}</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <label for="name">Name:</label>
+        <input type="text" name="name" required><br>
+        <label for="address">Address:</label>
+        <input type="text" name="address" required><br>
+        <label for="mobile_number">Mobile Number:</label>
+        <input type="text" name="mobile_number" required><br>
+        <label for="whatsapp_number">WhatsApp Number:</label>
+        <input type="text" name="whatsapp_number" required><br>
+        <button type="submit">Place Order</button>
+    </form>
+</body>
+</html>
+
+
+<!---------------------------------------------------------------------------------------------------------->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+  <img
+      alt="detail"
+      src="{{ product.image.url }}" style="width: 50%;"
+      class="responsive border-0 rounded-md img-fluid mb-3 sh-35 sh-md-45 sh-xl-60 w-100"
+  />
+  
+      
+  <h3 class="mb-4">{{ product.name }}</h3>
+
+  <div class="h4">{{ product.price }}</div>
+
+  <p class="mt-2 mb-4 sh-11 clamp-line" data-line="4">
+  {{ product.description }}
+  </p>
+      
+
+  
+    <form method="post" action="{% url 'add_to_cart_two' product_id=product.id %}">
+    {% csrf_token %}
+        <input type="submit" value="Add to Cart">
+    </form> 
+                
+ 
+</body>
+</html>
